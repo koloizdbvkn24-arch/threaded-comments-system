@@ -21,7 +21,7 @@ public sealed class Comment : ICommentComponent
         Guid id,
         Guid threadId,
         Guid authorId,
-        Guid parentId,
+        Guid? parentId,
         string text,
         DateTime createdAt
     )
