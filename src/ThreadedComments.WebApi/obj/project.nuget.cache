@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "XbMMCZkCUoA=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ruslan\\Documents\\домашка\\КолоїздБорис\\threaded-comments-system\\src\\ThreadedComments.WebApi\\ThreadedComments.WebApi.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ruslan\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.8\\microsoft.aspnetcore.openapi.9.0.8.nupkg.sha512",
+    "C:\\Users\\ruslan\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}

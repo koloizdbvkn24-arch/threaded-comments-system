@@ -1,0 +1,56 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "ThreadedComments.Infrastructure/1.0.0": {
+        "dependencies": {
+          "ThreadedComments.Application": "1.0.0",
+          "ThreadedComments.Domain": "1.0.0"
+        },
+        "runtime": {
+          "ThreadedComments.Infrastructure.dll": {}
+        }
+      },
+      "ThreadedComments.Application/1.0.0": {
+        "dependencies": {
+          "ThreadedComments.Domain": "1.0.0"
+        },
+        "runtime": {
+          "ThreadedComments.Application.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "ThreadedComments.Domain/1.0.0": {
+        "runtime": {
+          "ThreadedComments.Domain.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ThreadedComments.Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ThreadedComments.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ThreadedComments.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

@@ -1,0 +1,12 @@
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Domain\bin\Debug\net9.0\ThreadedComments.Domain.deps.json
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Domain\bin\Debug\net9.0\ThreadedComments.Domain.dll
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Domain\bin\Debug\net9.0\ThreadedComments.Domain.pdb
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Domain\obj\Debug\net9.0\ThreadedComments.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Domain\obj\Debug\net9.0\ThreadedComments.Domain.AssemblyInfoInputs.cache
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Domain\obj\Debug\net9.0\ThreadedComments.Domain.AssemblyInfo.cs
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Domain\obj\Debug\net9.0\ThreadedComments.Domain.csproj.CoreCompileInputs.cache
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Domain\obj\Debug\net9.0\ThreadedComments.Domain.sourcelink.json
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Domain\obj\Debug\net9.0\ThreadedComments.Domain.dll
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Domain\obj\Debug\net9.0\refint\ThreadedComments.Domain.dll
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Domain\obj\Debug\net9.0\ThreadedComments.Domain.pdb
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Domain\obj\Debug\net9.0\ref\ThreadedComments.Domain.dll

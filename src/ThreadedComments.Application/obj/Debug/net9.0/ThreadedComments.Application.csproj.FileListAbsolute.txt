@@ -1,0 +1,16 @@
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Application\bin\Debug\net9.0\ThreadedComments.Application.deps.json
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Application\bin\Debug\net9.0\ThreadedComments.Application.dll
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Application\bin\Debug\net9.0\ThreadedComments.Application.pdb
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Application\bin\Debug\net9.0\ThreadedComments.Domain.dll
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Application\bin\Debug\net9.0\ThreadedComments.Domain.pdb
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Application\obj\Debug\net9.0\ThreadedComments.Application.csproj.AssemblyReference.cache
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Application\obj\Debug\net9.0\ThreadedComments.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Application\obj\Debug\net9.0\ThreadedComments.Application.AssemblyInfoInputs.cache
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Application\obj\Debug\net9.0\ThreadedComments.Application.AssemblyInfo.cs
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Application\obj\Debug\net9.0\ThreadedComments.Application.csproj.CoreCompileInputs.cache
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Application\obj\Debug\net9.0\ThreadedComments.Application.sourcelink.json
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Application\obj\Debug\net9.0\Threaded.FB200FAA.Up2Date
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Application\obj\Debug\net9.0\ThreadedComments.Application.dll
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Application\obj\Debug\net9.0\refint\ThreadedComments.Application.dll
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Application\obj\Debug\net9.0\ThreadedComments.Application.pdb
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Application\obj\Debug\net9.0\ref\ThreadedComments.Application.dll
