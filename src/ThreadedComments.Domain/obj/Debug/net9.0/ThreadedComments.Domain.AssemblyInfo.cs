@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ThreadedComments.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c54c4f4a1736806d92242bc3e41a8e578e2abb9b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a36d5fcf820f1b6a743e46a6f846bdb01deca01d")]
 [assembly: System.Reflection.AssemblyProductAttribute("ThreadedComments.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ThreadedComments.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

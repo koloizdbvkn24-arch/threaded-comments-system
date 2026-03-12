@@ -1,4 +1,5 @@
 C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Infrastructure\bin\Debug\net9.0\ThreadedComments.Infrastructure.deps.json
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Infrastructure\bin\Debug\net9.0\ThreadedComments.Infrastructure.runtimeconfig.json
 C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Infrastructure\bin\Debug\net9.0\ThreadedComments.Infrastructure.dll
 C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Infrastructure\bin\Debug\net9.0\ThreadedComments.Infrastructure.pdb
 C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Infrastructure\bin\Debug\net9.0\ThreadedComments.Application.dll
@@ -15,4 +16,5 @@ C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comme
 C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Infrastructure\obj\Debug\net9.0\ThreadedComments.Infrastructure.dll
 C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Infrastructure\obj\Debug\net9.0\refint\ThreadedComments.Infrastructure.dll
 C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Infrastructure\obj\Debug\net9.0\ThreadedComments.Infrastructure.pdb
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Infrastructure\obj\Debug\net9.0\ThreadedComments.Infrastructure.genruntimeconfig.cache
 C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.Infrastructure\obj\Debug\net9.0\ref\ThreadedComments.Infrastructure.dll

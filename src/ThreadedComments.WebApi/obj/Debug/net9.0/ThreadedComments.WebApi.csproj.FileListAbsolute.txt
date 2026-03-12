@@ -6,8 +6,15 @@ C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comme
 C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.WebApi\bin\Debug\net9.0\ThreadedComments.WebApi.runtimeconfig.json
 C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.WebApi\bin\Debug\net9.0\ThreadedComments.WebApi.dll
 C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.WebApi\bin\Debug\net9.0\ThreadedComments.WebApi.pdb
-C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.WebApi\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.WebApi\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.WebApi\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.WebApi\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Relational.dll
 C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.WebApi\bin\Debug\net9.0\Microsoft.OpenApi.dll
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.WebApi\bin\Debug\net9.0\Npgsql.dll
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.WebApi\bin\Debug\net9.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.WebApi\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.WebApi\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.WebApi\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.WebApi\bin\Debug\net9.0\ThreadedComments.Application.dll
 C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.WebApi\bin\Debug\net9.0\ThreadedComments.Domain.dll
 C:\Users\ruslan\Documents\домашка\КолоїздБорис\threaded-comments-system\src\ThreadedComments.WebApi\bin\Debug\net9.0\ThreadedComments.Infrastructure.dll
