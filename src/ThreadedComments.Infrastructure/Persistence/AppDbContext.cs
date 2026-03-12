@@ -11,6 +11,7 @@ public sealed class AppDbContext : DbContext
 
     public DbSet<DomainThread> Threads => Set<DomainThread>();
     public DbSet<Comment> Comments => Set<Comment>();
+    public DbSet<Author> Authors => Set<Author>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

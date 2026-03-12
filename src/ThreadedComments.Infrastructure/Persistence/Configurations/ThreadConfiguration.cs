@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using DomainThread = ThreadedComments.Domain.Entities.Thread;
+using ThreadedComments.Domain.Entities;
 
 namespace ThreadedComments.Infrastructure.Persistence.Configuration;
 
@@ -19,5 +20,12 @@ public sealed class ThreadConfiguration : IEntityTypeConfiguration<DomainThread>
 
         builder.Property(x => x.CreadetAt)
             .IsRequired();
+
+        builder.HasOne<Author>()
+            .WithMany()
+            .HasForeignKey(x => x.AuthorId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasIndex(x => x.AuthorId);
     }
 }

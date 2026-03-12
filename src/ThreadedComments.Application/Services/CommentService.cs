@@ -11,16 +11,19 @@ public sealed class CommentService : ICommentService
     private readonly ICommentRepository _commentRepository;
     private readonly IThreadRepository _threadRepository;
     private readonly ICommentFactory _commentFactory;
+    private readonly IAuthorRepository _authorRepository;
 
     public CommentService(
         ICommentRepository commentRepository,
         IThreadRepository threadRepository,
-        ICommentFactory componentFactory
+        ICommentFactory componentFactory,
+        IAuthorRepository authorRepository
     )
     {
         _commentRepository = commentRepository;
         _threadRepository = threadRepository;
         _commentFactory = componentFactory;
+        _authorRepository = authorRepository;
     }
 
     public async Task<CommentDto> AddRootAsync(Guid threadId, AddRootCommentsRequest request, CancellationToken ct)
@@ -31,12 +34,15 @@ public sealed class CommentService : ICommentService
         if(request is null)
             throw new ArgumentException(nameof(request));
 
-        var thread = _threadRepository.GetByIdAsync(threadId, ct);
+        var thread = await _threadRepository.GetByIdAsync(threadId, ct);
 
         if(thread is null)
-        {
-            throw new InvalidOperationException("Thrad was not found.");
-        }
+            throw new InvalidOperationException("Thread was not found.");
+
+        var author = await _authorRepository.GetByIdAsync(request.AuthorId, ct);
+
+        if(author is null)
+            throw new InvalidOperationException("Author was not found.");
 
         var comment = _commentFactory.CreateRoot(threadId, request.AuthorId, request.Text);
 

@@ -27,8 +27,11 @@ public static class DependencyInjection
         services.AddScoped<ICommentFactory, CommentFactory>();
         services.AddScoped<IThreadRepository, ThreadRepository>();
         services.AddScoped<ICommentRepository, CommentRepository>();
+        services.AddScoped<IAuthorRepository, AuthorRepository>();
 
         services.AddScoped<ICommentService, CommentService>();
+        services.AddScoped<IThreadService, ThreadService>();
+        services.AddScoped<IAuthorService, AuthorService>();
 
         return services;
     }

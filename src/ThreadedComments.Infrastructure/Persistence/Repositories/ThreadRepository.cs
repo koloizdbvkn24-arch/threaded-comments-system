@@ -19,4 +19,10 @@ public sealed class ThreadRepository : IThreadRepository
             .AsNoTracking()
             .FirstOrDefaultAsync(x => x.Id == id, ct);
     }
+
+    public async Task AddAsync(DomainThread thread, CancellationToken ct)
+    {
+        await _context.Threads.AddAsync(thread, ct);
+        await _context.SaveChangesAsync(ct);
+    }
 }
