@@ -6,4 +6,5 @@ namespace ThreadedComments.Application.Interface.Repositories;
 public interface ICommentRepository
 {
     Task AddAsync(Comment comment, CancellationToken ct);
+    Task<Comment?> GetByIdAsync(Guid id, CancellationToken ct);
 }

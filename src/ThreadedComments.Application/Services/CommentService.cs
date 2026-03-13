@@ -27,7 +27,7 @@ public sealed class CommentService : ICommentService
         _authorRepository = authorRepository;
     }
 
-    public async Task<CommentDto> AddRootAsync(Guid threadId, AddRootCommentsRequest request, CancellationToken ct)
+    public async Task<CommentDto> AddRootAsync(Guid threadId, CreateCommentRequest request, CancellationToken ct)
     {
         if(threadId == Guid.Empty)
             throw new ArgumentException("Thread id cannot be empty.", nameof(threadId));
@@ -49,6 +49,63 @@ public sealed class CommentService : ICommentService
 
         await _commentRepository.AddAsync(comment, ct);
 
+        return new CommentDto
+        {
+            Id = comment.Id,
+            ThreadId = comment.ThreadId,
+            AuthorId = comment.AuthorId,
+            ParentId = comment.ParentId,
+            Text = comment.Text,
+            CreatedAt = comment.CreatedAt,
+            UpdateAt = comment.UpdateAt
+        };
+    }
+
+    public async Task<CommentDto> AddReplyAsync(
+        Guid threadId,
+        Guid parentCommentId,
+        CreateCommentRequest request,
+        CancellationToken ct
+    )
+    {
+        if(threadId == Guid.Empty)
+            throw new ArgumentException("Thread id cannot be empty.", nameof(threadId));
+
+        if(parentCommentId == Guid.Empty)
+            throw new ArgumentException("Parent comment id cannot be empty.", nameof(parentCommentId));
+
+        if(request is null)
+            throw new ArgumentNullException(nameof(request));
+
+        var thread = await _threadRepository.GetByIdAsync(threadId, ct);
+        if(thread is null)
+            throw new NotFoundException("Thread was not found.");
+
+        var author = await _authorRepository.GetByIdAsync(request.AuthorId, ct);
+        if(author is null)
+            throw new NotFoundException("Author was not found.");
+
+        var parentComment = await _commentRepository.GetByIdAsync(parentCommentId, ct);
+        if(parentComment is null)
+            throw new NotFoundException("Parent comment was not found.");
+
+        if(parentComment.ThreadId != threadId)
+            throw new ValidationException("Parent comment not belond to the specified thread.");
+
+        var reply = _commentFactory.CreateReply(
+            threadId,
+            request.AuthorId,
+            parentCommentId,
+            request.Text
+        );
+
+        await _commentRepository.AddAsync(reply, ct);
+
+        return MapToDto(reply);
+    }
+
+    private static CommentDto MapToDto(ThreadedComments.Domain.Entities.Comment comment)
+    {
         return new CommentDto
         {
             Id = comment.Id,

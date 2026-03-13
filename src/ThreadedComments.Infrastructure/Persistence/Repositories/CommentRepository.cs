@@ -19,4 +19,11 @@ public sealed class CommentRepository : ICommentRepository
         await _context.AddAsync(comment, ct);
         await _context.SaveChangesAsync(ct);
     }
+
+    public async Task<Comment?> GetByIdAsync(Guid id, CancellationToken ct)
+    {
+        return await _context.Comments
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => x.Id == id, ct);
+    }
 }

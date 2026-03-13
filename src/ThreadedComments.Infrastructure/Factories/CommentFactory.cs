@@ -18,4 +18,16 @@ public sealed class CommentFactory : ICommentFactory
             DateTime.UtcNow
         );
     }
+
+    public Comment CreateReply(Guid threadId, Guid authorId, Guid parentId, string text)
+    {
+        return new Comment(
+            Guid.NewGuid(),
+            threadId,
+            authorId,
+            parentId,
+            text,
+            DateTime.UtcNow
+        );
+    }
 }

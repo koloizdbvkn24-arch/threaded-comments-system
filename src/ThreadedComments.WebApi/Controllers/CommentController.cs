@@ -18,11 +18,24 @@ public class CommentController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<CommentDto>> AddRootCommet(
         Guid threadId,
-        [FromBody] AddRootCommentsRequest request,
+        [FromBody] CreateCommentRequest request,
         CancellationToken ct
     )
     {
         var result = await _commentService.AddRootAsync(threadId, request, ct);
+
+        return Ok(result);
+    }
+
+    [HttpPost("{parentCommentId:guid}/replies")]
+    public async Task<ActionResult<CommentDto>> AddReplyComment(
+        Guid threadId,
+        Guid parentCommentId,
+        [FromBody] CreateCommentRequest request,
+        CancellationToken ct
+    )
+    {
+        var result = await _commentService.AddReplyAsync(threadId, parentCommentId, request, ct);
 
         return Ok(result);
     }
