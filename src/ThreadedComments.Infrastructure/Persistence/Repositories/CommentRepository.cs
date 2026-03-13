@@ -26,4 +26,13 @@ public sealed class CommentRepository : ICommentRepository
             .AsNoTracking()
             .FirstOrDefaultAsync(x => x.Id == id, ct);
     }
+
+    public async Task<List<Comment>> GetByThreadIdAsync(Guid threadId, CancellationToken ct)
+    {
+        return await _context.Comments
+            .AsNoTracking()
+            .Where(x => x.ThreadId == threadId)
+            .OrderBy(x => x.CreatedAt)
+            .ToListAsync(ct);
+    }
 }

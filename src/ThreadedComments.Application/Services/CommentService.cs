@@ -3,6 +3,8 @@ using ThreadedComments.Application.DTOs.Comments;
 using ThreadedComments.Application.Interface.Repositories;
 using ThreadedComments.Application.Interface.Services;
 using ThreadedComments.Application.Common.Exceptions;
+using System.Runtime.CompilerServices;
+using ThreadedComments.Domain.Entities;
 
 namespace ThreadedComments.Application.Services;
 
@@ -104,6 +106,20 @@ public sealed class CommentService : ICommentService
         return MapToDto(reply);
     }
 
+    public async Task<IReadOnlyList<CommentTreeItemDto>> GetThreadCommentsAsync(Guid threadId, CancellationToken ct)
+    {
+        if(threadId == Guid.Empty)
+            throw new ArgumentException("Thread id cannot be empty.", nameof(threadId));
+
+        var thread = await _threadRepository.GetByIdAsync(threadId, ct);
+        if(thread is null)
+            throw new NotFoundException("Thread was not found.");
+
+        var comments = await _commentRepository.GetByThreadIdAsync(threadId, ct);
+        
+        return BuildTree(comments);
+    }
+
     private static CommentDto MapToDto(ThreadedComments.Domain.Entities.Comment comment)
     {
         return new CommentDto
@@ -116,5 +132,42 @@ public sealed class CommentService : ICommentService
             CreatedAt = comment.CreatedAt,
             UpdateAt = comment.UpdateAt
         };
+    }
+
+    private static IReadOnlyList<CommentTreeItemDto> BuildTree(List<Comment> comments)
+    {
+        var nodes = comments.ToDictionary(
+            comment => comment.Id,
+            comment => new CommentTreeItemDto
+            {
+                Id = comment.Id,
+                ThreadId = comment.ThreadId,
+                AuthorId = comment.AuthorId,
+                ParentId = comment.ParentId,
+                Text = comment.Text,
+                CreatedAt = comment.CreatedAt,
+                UpdateAt = comment.UpdateAt,
+                Replies = new List<CommentTreeItemDto>()
+            });
+
+        var roots = new List<CommentTreeItemDto>();
+
+        foreach(var comment in comments)
+        {
+            var currentNode = nodes[comment.Id];
+
+            if(comment.ParentId is null)
+            {
+                roots.Add(currentNode);
+                continue;
+            }
+
+            if(nodes.TryGetValue(comment.ParentId.Value, out var parentNode))
+            {
+                parentNode.Replies.Add(currentNode);
+            }
+        }
+
+        return roots;
     }
 }

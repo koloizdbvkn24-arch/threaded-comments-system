@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ThreadedComments.Application.Interface.Services;
 using ThreadedComments.Application.DTOs.Comments;
+using Microsoft.VisualBasic;
 
 namespace ThreadedComments.WebApi.Controllers;
 
@@ -36,6 +37,17 @@ public class CommentController : ControllerBase
     )
     {
         var result = await _commentService.AddReplyAsync(threadId, parentCommentId, request, ct);
+
+        return Ok(result);
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<CommentTreeItemDto>> GetThreadComments(
+        Guid threadId,
+        CancellationToken ct
+    )
+    {
+        var result = await _commentService.GetThreadCommentsAsync(threadId, ct);
 
         return Ok(result);
     }
