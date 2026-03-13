@@ -2,6 +2,7 @@ using ThreadedComments.Application.Interface.Services;
 using ThreadedComments.Application.DTOs.Treads;
 using ThreadedComments.Application.Interface.Repositories;
 using DomainThread = ThreadedComments.Domain.Entities.Thread;
+using ThreadedComments.Application.Common.Exceptions;
 
 namespace ThreadedComments.Application.Services;
 
@@ -28,7 +29,7 @@ public sealed class ThreadService : IThreadService
         var author = await _authorRepository.GetByIdAsync(request.AuthorId, ct);
 
         if(author is null)
-            throw new InvalidOperationException("Author id not found");
+            throw new NotFoundException("Author was not found");
 
         var thread = new DomainThread(
             Guid.NewGuid(),
