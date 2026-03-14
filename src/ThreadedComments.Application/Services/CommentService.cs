@@ -4,6 +4,7 @@ using ThreadedComments.Application.Interface.Repositories;
 using ThreadedComments.Application.Interface.Services;
 using ThreadedComments.Application.Common.Exceptions;
 using ThreadedComments.Domain.Entities;
+using System.ComponentModel;
 
 namespace ThreadedComments.Application.Services;
 
@@ -145,6 +146,38 @@ public sealed class CommentService : ICommentService
         return MapToDto(comment);
     }
 
+    public async Task DeleteCommentAsync(Guid commentId, DeleteCommentBranchRequest request, CancellationToken ct)
+    {
+        if(commentId == Guid.Empty)
+            throw new ArgumentException("Comment id cannot be empty.", nameof(commentId));
+
+        if(request is null)
+            throw new ArgumentNullException(nameof(request));
+
+        var comment = await _commentRepository.GetByIdAsync(commentId, ct);
+        if(comment is null)
+            throw new NotFoundException("Comment was not found.");
+
+        var author = await _authorRepository.GetByIdAsync(request.AuthorId, ct);
+        if(author is null)
+            throw new NotFoundException("Author was not found.");
+
+        if(comment.AuthorId != request.AuthorId)
+            throw new ForbiddenException("You can delete ony own comment branch.");
+
+        var commentOfThread = await _commentRepository.GetByThreadIdAsync(comment.ThreadId, ct);
+
+        var commentById = BuildComment(commentOfThread);
+
+        if(!commentById.TryGetValue(commentId, out var rootOfBranch))
+            throw new NotFoundException("Comment branch root was not found.");
+
+        var idsToDelete = CollectBranchIds(rootOfBranch);
+
+        await _commentRepository.DeleteRangeAsync(idsToDelete, ct);
+    }
+
+    // Допоміжні методи
     private static CommentDto MapToDto(ThreadedComments.Domain.Entities.Comment comment)
     {
         return new CommentDto
@@ -195,4 +228,44 @@ public sealed class CommentService : ICommentService
 
         return roots;
     }
+
+    private static Dictionary<Guid, Comment> BuildComment(List<Comment> comments)
+    {
+        var commentById = comments.ToDictionary(x => x.Id);
+
+        foreach(var comment in comments)
+        {
+            if(comment.ParentId is null)
+                continue;
+
+            if(commentById.TryGetValue(comment.ParentId.Value, out var parent))
+            {
+                parent.AddChild(comment);
+            }
+        }
+
+        return commentById;
+    }
+
+    private static List<Guid> CollectBranchIds(Comment rootComment)
+    {
+        var ids = new List<Guid>();
+        var stack = new Stack<Comment>();
+
+        stack.Push(rootComment);
+
+        while(stack.Count > 0)
+        {
+            var current = stack.Pop();
+            ids.Add(current.Id);
+
+            foreach(var child in current.Children)
+            {
+                stack.Push(child);
+            }
+        }
+
+        return ids;
+    }
 }
+

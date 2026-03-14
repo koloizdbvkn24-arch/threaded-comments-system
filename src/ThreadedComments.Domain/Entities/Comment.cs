@@ -61,6 +61,8 @@ public sealed class Comment : ICommentComponent
         return _children.Cast<ICommentComponent>().ToList().AsReadOnly();
     }
 
+    public IReadOnlyList<Comment> Children => _children.AsReadOnly();
+
     public void AddChild(ICommentComponent child)
     {
         if (child is not Comment commentChild)
@@ -78,4 +80,6 @@ public sealed class Comment : ICommentComponent
             _children.Remove(child);
         }
     }
+
+
 }

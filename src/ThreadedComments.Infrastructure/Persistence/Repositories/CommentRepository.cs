@@ -41,4 +41,14 @@ public sealed class CommentRepository : ICommentRepository
         _context.Comments.Update(comment);
         await _context.SaveChangesAsync(ct);
     }
+
+    public async Task DeleteRangeAsync(IEnumerable<Guid> ids, CancellationToken ct)
+    {
+        var comments = await _context.Comments
+            .Where(x => ids.Contains(x.Id))
+            .ToListAsync(ct);
+
+        _context.Comments.RemoveRange(comments);
+        await _context.SaveChangesAsync(ct);
+    }
 }

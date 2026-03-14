@@ -27,4 +27,16 @@ public class CommentManagerController : ControllerBase
 
         return Ok(result);
     }
+
+    [HttpDelete("delete-brench")]
+    public async Task<ActionResult> RemoveCommentBrabch(
+        Guid commentId,
+        [FromBody] DeleteCommentBranchRequest request,
+        CancellationToken ct
+    )
+    {
+        await _commentService.DeleteCommentAsync(commentId, request, ct);
+
+        return NoContent();
+    }
 }

@@ -43,6 +43,11 @@ public sealed class CommentConfiguration : IEntityTypeConfiguration<Comment>
             .HasForeignKey(x => x.AuthorId)
             .OnDelete(DeleteBehavior.Restrict);
 
+        builder.HasOne<Comment>()
+            .WithMany(x => x.Children)
+            .HasForeignKey(x => x.ParentId)
+            .OnDelete(DeleteBehavior.Restrict);
+
         builder.HasIndex(x => x.ThreadId);
         builder.HasIndex(x => x.ParentId);
         builder.HasIndex(x => x.AuthorId);
