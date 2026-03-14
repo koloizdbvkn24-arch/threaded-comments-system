@@ -17,13 +17,15 @@ public sealed class CommentService : ICommentService
     private readonly ICommentFactory _commentFactory;
     private readonly IAuthorRepository _authorRepository;
     private readonly ICommentTraversal _commentTraversal;
+    private readonly IReactionRepository _reactionRepository;
 
     public CommentService(
         ICommentRepository commentRepository,
         IThreadRepository threadRepository,
         ICommentFactory componentFactory,
         IAuthorRepository authorRepository,
-        ICommentTraversal commentTraversal
+        ICommentTraversal commentTraversal,
+        IReactionRepository reactionRepository
     )
     {
         _commentRepository = commentRepository;
@@ -31,6 +33,7 @@ public sealed class CommentService : ICommentService
         _commentFactory = componentFactory;
         _authorRepository = authorRepository;
         _commentTraversal = commentTraversal;
+        _reactionRepository = reactionRepository;
     }
 
     public async Task<CommentDto> AddRootAsync(Guid threadId, CreateCommentRequest request, CancellationToken ct)
@@ -120,8 +123,16 @@ public sealed class CommentService : ICommentService
             throw new NotFoundException("Thread was not found.");
 
         var comments = await _commentRepository.GetByThreadIdAsync(threadId, ct);
+
+        if(comments.Count == 0)
+            return [];
+
+        var commentIds = comments.Select(x => x.Id).ToList();
+        var reactions = await _reactionRepository.GetByCommentIdAsync(commentIds, ct);
+
+        var reactionStats = BuildReactionStats(reactions);
         
-        return BuildTree(comments);
+        return BuildTree(comments, reactionStats);
     }
 
     public async Task<CommentDto> EditCommentAsync(Guid commentId, EditCommentRequest request, CancellationToken ct)
@@ -196,11 +207,18 @@ public sealed class CommentService : ICommentService
         };
     }
 
-    private static IReadOnlyList<CommentTreeItemDto> BuildTree(List<Comment> comments)
+    private static IReadOnlyList<CommentTreeItemDto> BuildTree(
+        List<Comment> comments,
+        Dictionary<Guid, (int likes, int dislikes, int score)> reactionStats
+        )
     {
         var nodes = comments.ToDictionary(
             comment => comment.Id,
-            comment => new CommentTreeItemDto
+            comment =>
+        {
+            reactionStats.TryGetValue(comment.Id, out var stats);
+
+            return new CommentTreeItemDto
             {
                 Id = comment.Id,
                 ThreadId = comment.ThreadId,
@@ -209,8 +227,14 @@ public sealed class CommentService : ICommentService
                 Text = comment.Text,
                 CreatedAt = comment.CreatedAt,
                 UpdateAt = comment.UpdateAt,
+
+                LikesCount = stats.likes,
+                DislikesCount = stats.dislikes,
+                PopularityScore = stats.score,
+
                 Replies = new List<CommentTreeItemDto>()
-            });
+            };
+        });
 
         var roots = new List<CommentTreeItemDto>();
 
@@ -264,5 +288,20 @@ public sealed class CommentService : ICommentService
 
         return ids;
     }
+
+    private static Dictionary<Guid, (int likes, int dislikes, int score)> BuildReactionStats(List<Reaction> reactions)
+{
+    return reactions
+        .GroupBy(x => x.CommentId)
+        .ToDictionary(
+            group => group.Key,
+            group =>
+            {
+                var likes = group.Count(x => x.Type == Domain.Enums.ReactionType.Like);
+                var dislikes = group.Count(x => x.Type == Domain.Enums.ReactionType.DisLike);
+
+                return (likes, dislikes, likes - dislikes);
+            });
+}
 }
 

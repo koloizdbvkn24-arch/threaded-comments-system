@@ -7,9 +7,16 @@ public sealed class CommentTreeItemDto
     public Guid ThreadId { get; init; }
     public Guid AuthorId { get; init; }
     public Guid? ParentId { get; init; }
+
     public string Text { get; init; } = string.Empty;
+
+    public int LikesCount { get; init; }
+    public int DislikesCount { get; init; }
+    public int PopularityScore  { get; init; }
+
     public DateTime CreatedAt { get; init; }
     public DateTime? UpdateAt { get; init; }
+
 
     public List<CommentTreeItemDto> Replies { get; init; } = new();
 }

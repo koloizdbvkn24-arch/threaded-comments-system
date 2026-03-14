@@ -36,6 +36,10 @@ public static class DependencyInjection
         services.AddScoped<IAuthorService, AuthorService>();
 
         services.AddScoped<ICommentTraversal, CommentTraversal>();
+
+        services.AddScoped<IReactionService, ReactionService>();
+        services.AddScoped<IReactionRepository, ReactionRepository>();
+
         return services;
     }
 }
