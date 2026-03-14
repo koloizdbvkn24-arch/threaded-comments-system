@@ -10,6 +10,8 @@ using ThreadedComments.Application.Interface.Services;
 using ThreadedComments.Application.Services;
 using ThreadedComments.Application.Interface.Traversal;
 using ThreadedComments.Infrastructure.Traversal;
+using ThreadedComments.Application.Strategies;
+using ThreadedComments.Application.Interface.Strategies;
 
 namespace ThreadedComments.Infrastructure;
 
@@ -39,6 +41,10 @@ public static class DependencyInjection
 
         services.AddScoped<IReactionService, ReactionService>();
         services.AddScoped<IReactionRepository, ReactionRepository>();
+
+        services.AddScoped<SortByNewestStrategy>();
+        services.AddScoped<SortByPopularityStrategy>();
+        services.AddScoped<ICommentSortStrategyFactory, CommentSortStrategyFactory>();
 
         return services;
     }

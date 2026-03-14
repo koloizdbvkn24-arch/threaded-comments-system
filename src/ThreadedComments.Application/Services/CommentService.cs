@@ -5,6 +5,8 @@ using ThreadedComments.Application.Interface.Traversal;
 using ThreadedComments.Application.Common.Exceptions;
 using ThreadedComments.Application.DTOs.Comments;
 using ThreadedComments.Domain.Entities;
+using ThreadedComments.Application.Common.Enums;
+using ThreadedComments.Application.Interface.Strategies;
 
 
 namespace ThreadedComments.Application.Services;
@@ -18,6 +20,7 @@ public sealed class CommentService : ICommentService
     private readonly IAuthorRepository _authorRepository;
     private readonly ICommentTraversal _commentTraversal;
     private readonly IReactionRepository _reactionRepository;
+    private readonly ICommentSortStrategyFactory _commentSortStrategyFactory;
 
     public CommentService(
         ICommentRepository commentRepository,
@@ -25,7 +28,8 @@ public sealed class CommentService : ICommentService
         ICommentFactory componentFactory,
         IAuthorRepository authorRepository,
         ICommentTraversal commentTraversal,
-        IReactionRepository reactionRepository
+        IReactionRepository reactionRepository,
+        ICommentSortStrategyFactory commentSortStrategyFactory
     )
     {
         _commentRepository = commentRepository;
@@ -34,6 +38,7 @@ public sealed class CommentService : ICommentService
         _authorRepository = authorRepository;
         _commentTraversal = commentTraversal;
         _reactionRepository = reactionRepository;
+        _commentSortStrategyFactory = commentSortStrategyFactory;
     }
 
     public async Task<CommentDto> AddRootAsync(Guid threadId, CreateCommentRequest request, CancellationToken ct)
@@ -113,7 +118,10 @@ public sealed class CommentService : ICommentService
         return MapToDto(reply);
     }
 
-    public async Task<IReadOnlyList<CommentTreeItemDto>> GetThreadCommentsAsync(Guid threadId, CancellationToken ct)
+    public async Task<IReadOnlyList<CommentTreeItemDto>> GetThreadCommentsAsync(
+        Guid threadId,
+        CommentSortBy sortBy,
+        CancellationToken ct)
     {
         if(threadId == Guid.Empty)
             throw new ArgumentException("Thread id cannot be empty.", nameof(threadId));
@@ -131,8 +139,11 @@ public sealed class CommentService : ICommentService
         var reactions = await _reactionRepository.GetByCommentIdAsync(commentIds, ct);
 
         var reactionStats = BuildReactionStats(reactions);
-        
-        return BuildTree(comments, reactionStats);
+        var tree = BuildTree(comments, reactionStats);
+
+        var strategy = _commentSortStrategyFactory.Create(sortBy);
+
+        return strategy.Sort(tree);
     }
 
     public async Task<CommentDto> EditCommentAsync(Guid commentId, EditCommentRequest request, CancellationToken ct)

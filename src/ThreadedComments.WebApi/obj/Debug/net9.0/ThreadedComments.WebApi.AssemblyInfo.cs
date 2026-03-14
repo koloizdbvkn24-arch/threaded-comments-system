@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ThreadedComments.WebApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4209cb90167d152bfcfcbdaf904f8c543ff4132a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+56764665b10d01eaeebc52e6b50eaa20d787fe61")]
 [assembly: System.Reflection.AssemblyProductAttribute("ThreadedComments.WebApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ThreadedComments.WebApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

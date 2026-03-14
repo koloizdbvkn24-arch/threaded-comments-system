@@ -1,3 +1,4 @@
+using ThreadedComments.Application.Common.Enums;
 using ThreadedComments.Application.DTOs.Comments;
 
 namespace ThreadedComments.Application.Interface.Services;
@@ -14,7 +15,7 @@ public interface ICommentService
         CancellationToken ct
     );
 
-    Task<IReadOnlyList<CommentTreeItemDto>> GetThreadCommentsAsync(Guid threadId, CancellationToken ct);
+    Task<IReadOnlyList<CommentTreeItemDto>> GetThreadCommentsAsync(Guid threadId, CommentSortBy sorBy, CancellationToken ct);
     Task<CommentDto> EditCommentAsync(Guid commentId, EditCommentRequest request, CancellationToken ct);
     Task DeleteCommentAsync(Guid commentId, DeleteCommentBranchRequest request, CancellationToken ct);
 }

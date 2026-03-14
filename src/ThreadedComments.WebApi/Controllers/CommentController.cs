@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ThreadedComments.Application.Interface.Services;
 using ThreadedComments.Application.DTOs.Comments;
+using ThreadedComments.Application.Common.Enums;
 
 namespace ThreadedComments.WebApi.Controllers;
 
@@ -43,11 +44,27 @@ public class CommentController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<CommentTreeItemDto>> GetThreadComments(
         Guid threadId,
+        [FromQuery] string? sortBy,
         CancellationToken ct
     )
     {
-        var result = await _commentService.GetThreadCommentsAsync(threadId, ct);
+        var sortMode = ParseSortBy(sortBy);
+
+        var result = await _commentService.GetThreadCommentsAsync(threadId, sortMode, ct);
 
         return Ok(result);
+    }
+    
+    private static CommentSortBy ParseSortBy(string? sortBy)
+    {
+        if(string.IsNullOrWhiteSpace(sortBy))
+            return CommentSortBy.Newest;
+
+        return sortBy.Trim().ToLowerInvariant() switch
+        {
+            "popularity" => CommentSortBy.Popularity,
+            "newest" => CommentSortBy.Newest,
+            _ => CommentSortBy.Newest
+        };
     }
 }
