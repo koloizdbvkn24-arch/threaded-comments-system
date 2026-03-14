@@ -1,10 +1,11 @@
 using ThreadedComments.Application.Interface.Factories;
-using ThreadedComments.Application.DTOs.Comments;
 using ThreadedComments.Application.Interface.Repositories;
 using ThreadedComments.Application.Interface.Services;
+using ThreadedComments.Application.Interface.Traversal;
 using ThreadedComments.Application.Common.Exceptions;
+using ThreadedComments.Application.DTOs.Comments;
 using ThreadedComments.Domain.Entities;
-using System.ComponentModel;
+
 
 namespace ThreadedComments.Application.Services;
 
@@ -15,18 +16,21 @@ public sealed class CommentService : ICommentService
     private readonly IThreadRepository _threadRepository;
     private readonly ICommentFactory _commentFactory;
     private readonly IAuthorRepository _authorRepository;
+    private readonly ICommentTraversal _commentTraversal;
 
     public CommentService(
         ICommentRepository commentRepository,
         IThreadRepository threadRepository,
         ICommentFactory componentFactory,
-        IAuthorRepository authorRepository
+        IAuthorRepository authorRepository,
+        ICommentTraversal commentTraversal
     )
     {
         _commentRepository = commentRepository;
         _threadRepository = threadRepository;
         _commentFactory = componentFactory;
         _authorRepository = authorRepository;
+        _commentTraversal = commentTraversal;
     }
 
     public async Task<CommentDto> AddRootAsync(Guid threadId, CreateCommentRequest request, CancellationToken ct)
@@ -247,22 +251,15 @@ public sealed class CommentService : ICommentService
         return commentById;
     }
 
-    private static List<Guid> CollectBranchIds(Comment rootComment)
+    private List<Guid> CollectBranchIds(Comment rootComment)
     {
         var ids = new List<Guid>();
-        var stack = new Stack<Comment>();
+        var iterator = _commentTraversal.CreateDfs(rootComment);
 
-        stack.Push(rootComment);
-
-        while(stack.Count > 0)
+        while (iterator.HasNext())
         {
-            var current = stack.Pop();
+            var current = iterator.Next();
             ids.Add(current.Id);
-
-            foreach(var child in current.Children)
-            {
-                stack.Push(child);
-            }
         }
 
         return ids;

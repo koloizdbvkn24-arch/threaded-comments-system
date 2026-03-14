@@ -8,6 +8,8 @@ using ThreadedComments.Application.Interface.Factories;
 using ThreadedComments.Infrastructure.Persistence;
 using ThreadedComments.Application.Interface.Services;
 using ThreadedComments.Application.Services;
+using ThreadedComments.Application.Interface.Traversal;
+using ThreadedComments.Infrastructure.Traversal;
 
 namespace ThreadedComments.Infrastructure;
 
@@ -33,6 +35,7 @@ public static class DependencyInjection
         services.AddScoped<IThreadService, ThreadService>();
         services.AddScoped<IAuthorService, AuthorService>();
 
+        services.AddScoped<ICommentTraversal, CommentTraversal>();
         return services;
     }
 }
