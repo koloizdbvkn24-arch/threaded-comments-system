@@ -16,7 +16,7 @@ public sealed class CommentRepository : ICommentRepository
 
     public async Task AddAsync(Comment comment, CancellationToken ct)
     {
-        await _context.AddAsync(comment, ct);
+        await _context.Comments.AddAsync(comment, ct);
         await _context.SaveChangesAsync(ct);
     }
 
@@ -34,5 +34,11 @@ public sealed class CommentRepository : ICommentRepository
             .Where(x => x.ThreadId == threadId)
             .OrderBy(x => x.CreatedAt)
             .ToListAsync(ct);
+    }
+
+    public async Task UpdateAsync(Comment comment, CancellationToken ct)
+    {
+        _context.Comments.Update(comment);
+        await _context.SaveChangesAsync(ct);
     }
 }

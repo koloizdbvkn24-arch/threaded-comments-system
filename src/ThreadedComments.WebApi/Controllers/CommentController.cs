@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ThreadedComments.Application.Interface.Services;
 using ThreadedComments.Application.DTOs.Comments;
-using Microsoft.VisualBasic;
 
 namespace ThreadedComments.WebApi.Controllers;
 

@@ -3,7 +3,6 @@ using ThreadedComments.Application.DTOs.Comments;
 using ThreadedComments.Application.Interface.Repositories;
 using ThreadedComments.Application.Interface.Services;
 using ThreadedComments.Application.Common.Exceptions;
-using System.Runtime.CompilerServices;
 using ThreadedComments.Domain.Entities;
 
 namespace ThreadedComments.Application.Services;
@@ -59,7 +58,7 @@ public sealed class CommentService : ICommentService
             ParentId = comment.ParentId,
             Text = comment.Text,
             CreatedAt = comment.CreatedAt,
-            UpdateAt = comment.UpdateAt
+            UpdatedAt = comment.UpdateAt
         };
     }
 
@@ -120,6 +119,32 @@ public sealed class CommentService : ICommentService
         return BuildTree(comments);
     }
 
+    public async Task<CommentDto> EditCommentAsync(Guid commentId, EditCommentRequest request, CancellationToken ct)
+    {
+        if(commentId == Guid.Empty)
+            throw new ArgumentException("Comment id cannot be empty.", nameof(commentId));
+
+        if(request is null)
+            throw new ArgumentNullException(nameof(request));
+
+        var comment = await _commentRepository.GetByIdAsync(commentId, ct);
+        if(comment is null)
+            throw new NotFoundException("Comment was not found.");
+
+        var author = await _authorRepository.GetByIdAsync(request.AuthorId, ct);
+        if(author is null)
+            throw new NotFoundException("Author was not found.");
+
+        if(comment.AuthorId != request.AuthorId)
+            throw new ForbiddenException("You can edit only your own comments.");
+
+        comment.Edit(request.NewText, DateTime.UtcNow);
+
+        await _commentRepository.UpdateAsync(comment, ct);
+
+        return MapToDto(comment);
+    }
+
     private static CommentDto MapToDto(ThreadedComments.Domain.Entities.Comment comment)
     {
         return new CommentDto
@@ -130,7 +155,7 @@ public sealed class CommentService : ICommentService
             ParentId = comment.ParentId,
             Text = comment.Text,
             CreatedAt = comment.CreatedAt,
-            UpdateAt = comment.UpdateAt
+            UpdatedAt = comment.UpdateAt
         };
     }
 

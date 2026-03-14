@@ -15,4 +15,6 @@ public interface ICommentService
     );
 
     Task<IReadOnlyList<CommentTreeItemDto>> GetThreadCommentsAsync(Guid threadId, CancellationToken ct);
+
+    Task<CommentDto> EditCommentAsync(Guid commentId, EditCommentRequest request, CancellationToken ct);
 }

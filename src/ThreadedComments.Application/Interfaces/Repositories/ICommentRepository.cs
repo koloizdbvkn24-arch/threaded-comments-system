@@ -8,4 +8,5 @@ public interface ICommentRepository
     Task AddAsync(Comment comment, CancellationToken ct);
     Task<Comment?> GetByIdAsync(Guid id, CancellationToken ct);
     Task<List<Comment>> GetByThreadIdAsync(Guid threadId, CancellationToken ct);
+    Task UpdateAsync(Comment comment, CancellationToken ct);
 }
